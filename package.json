@@ -1,0 +1,21 @@
+{
+  "name": "broker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "broker_nodatabase.js",
+  "scripts": {
+    "start": "broker_nodatabase.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ss"
+  },
+  "keywords": [
+    "ss"
+  ],
+  "author": "vutran",
+  "license": "ISC",
+  "dependencies": {
+    "mosca": "^2.7.0"
+  }
+}
