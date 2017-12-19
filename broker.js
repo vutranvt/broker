@@ -2,15 +2,15 @@
 var mosca = require('mosca');
 
 
-// var settings = {
-//     port: 1884,
-//     http: {
-//         port: 3334,
-//         bundle: true,
-//         static: './'
-//     }
-//     // backend: ascoltatore
-// };
+var settings = {
+    port: 1884,
+    http: {
+        port: 3334,
+        bundle: true,
+        static: './'
+    }
+    // backend: ascoltatore
+};
 
 var authenticate = function (client, username, password, callback) {
     if (username == "esp32" && password.toString() == "mtt@23377")

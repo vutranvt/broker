@@ -16,6 +16,6 @@
   "author": "vutran",
   "license": "ISC",
   "dependencies": {
-    "mosca": "^2.7.0"
+    "mosca": "^2.5.1"
   }
 }
