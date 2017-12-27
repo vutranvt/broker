@@ -30,6 +30,7 @@ const config = {
 
 
 const pool1 = new sql.ConnectionPool(config);
+const pool2 = new sql.ConnectionPool(config);
 
 pool1.connect(err => {
     // ...
@@ -38,7 +39,18 @@ pool1.connect(err => {
 
         // console.dir(result)
         console.dir(result);
-        console.dir(result.recordset[0].Value1);
+        // console.dir(result.recordset[0].Value1);
+    })
+})
+
+pool2.connect(err => {
+    // ...
+    pool2.request().query('insert into DATA (Id, Topic, Value1, Value2, Value3) values (3, \'nth/test\', 18, 23, 20)' , (err, result) => {
+        // ... error checks
+
+        // console.dir(result)
+        console.dir(result);
+        // console.dir(result.recordset[0].Value1);
     })
 })
 
@@ -103,20 +115,23 @@ broker.on('published', function (packet, client) {
         console.log(err.message);
     }
     console.log('Published data: ', objPayload);
+    console.log('--------------- ');
 });
 
 // fired when a client subscribes to a topic
 broker.on('subscribed', function (topic, client) {
     console.log('subscribed topic: ', topic);
     console.log('----------------:');
-
+    
 });
 
 
 // fired when a client subscribes to a topic
 broker.on('unsubscribed', function (topic, client) {
     var data = "off";
-
+    console.log('unsubscribed topic: ', topic);
+    console.log('------------------- ');
+    
 });
 
 // fired when a client is disconnecting
@@ -127,10 +142,11 @@ broker.on('clientDisconnecting', function (client) {
 /* 
 fired when a client is disconnected
 add "status: disconnected" into collection: clientInfo
- */
+*/
 broker.on('clientDisconnected', function (client) {
     console.log('clientDisconnected id: ', client.id);
-
+    console.log('------------------- ');
+    
 });
 
 
