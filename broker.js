@@ -32,20 +32,11 @@ const config = {
 const pool1 = new sql.ConnectionPool(config);
 const pool2 = new sql.ConnectionPool(config);
 
-pool1.connect(err => {
-    // ...
-    pool1.request().query('select * from DATA', (err, result) => {
-        // ... error checks
-
-        // console.dir(result)
-        console.dir(result);
-        // console.dir(result.recordset[0].Value1);
-    })
-})
+var temp = 'nth/test';
 
 pool2.connect(err => {
     // ...
-    pool2.request().query('insert into DATA (Id, Topic, Value1, Value2, Value3) values (3, \'nth/test\', 18, 23, 20)' , (err, result) => {
+    pool2.request().query(`insert into DATA (Topic, Value1, Value2, Value3) values (\'${temp}\', 31, 31, 31)` , (err, result) => {
         // ... error checks
 
         // console.dir(result)
@@ -107,15 +98,32 @@ broker.on('published', function (packet, client) {
     var stringTopic = packet.topic.toString('utf-8');
     var objPayload = stringPayload;
 
-    try {
-        //Nếu Payload là chuối JSON thì convert to Object
-        objPayload = JSON.parse(stringPayload);
-    } catch (err) {
-        //Xuất lỗi nếu Payload ko phải là chuổi JSON
-        console.log(err.message);
-    }
+    // try {
+    //     //Nếu Payload là chuối JSON thì convert to Object
+    //     objPayload = JSON.parse(stringPayload);
+    // } catch (err) {
+    //     //Xuất lỗi nếu Payload ko phải là chuổi JSON
+    //     console.log(err.message);
+    // }
     console.log('Published data: ', objPayload);
+    console.log('Published data: ', stringPayload);
     console.log('--------------- ');
+
+    var data = 'nth/test';
+
+        pool1.connect(err => {
+            // ...
+            pool1.request().query(`insert into DATA (Topic, Value1, Value2, Value3) values (\'${data}\', 32, 32, 32)`, (err, result) => {
+                // ... error checks
+
+                // console.dir(result)
+                console.dir(result);
+                // console.dir(result.recordset[0].Value1);
+            })
+        })
+    
+
+
 });
 
 // fired when a client subscribes to a topic
